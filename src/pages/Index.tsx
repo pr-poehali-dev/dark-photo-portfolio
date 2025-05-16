@@ -1,11 +1,11 @@
+import { slides } from "@/data/slides";
+import About from "@/components/home/About";
+import Services from "@/components/home/Services";
+import Galleries from "@/components/home/Galleries";
+import Contacts from "@/components/home/Contacts";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, Menu } from "lucide-react";
-import { slides } from "@/data/slides";
-import About from "@/components/home/About";
-import Galleries from "@/components/home/Galleries";
-import Services from "@/components/home/Services";
-import Contacts from "@/components/home/Contacts";
 
 const Index = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -155,25 +155,18 @@ const Index = () => {
         </div>
       </div>
 
-      <div
-        className="h-20 bg-[#121212] flex justify-center items-center"
-        id="галереи"
-      >
+      {/* Дополнительное содержимое (показывается при скролле) */}
+      <div className="h-20 bg-[#121212] flex justify-center items-center">
         <div className="text-[#D4AF37]/50 text-sm tracking-widest">
           ЛИСТАЙТЕ ВНИЗ
         </div>
       </div>
 
-      <Galleries />
+      {/* Добавляем другие секции сайта */}
       <About />
+      <Galleries />
       <Services />
       <Contacts />
-
-      <footer className="py-6 bg-[#0a0a0a] text-center text-white/50 text-sm">
-        <div className="container mx-auto">
-          <p>© {new Date().getFullYear()} Фотограф. Все права защищены.</p>
-        </div>
-      </footer>
     </div>
   );
 };
