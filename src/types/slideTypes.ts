@@ -6,4 +6,4 @@ export interface SlideData {
   description: string;
 }
 
-export type SlideItem = SlideData;
+export interface SlideItem extends SlideData {}

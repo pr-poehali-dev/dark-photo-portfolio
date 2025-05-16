@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { SlideData } from "@/types/slideTypes";
 import HeroSlide from "./HeroSlide";
