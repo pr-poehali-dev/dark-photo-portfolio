@@ -11,13 +11,13 @@ interface HeroControlsProps {
   isTransitioning: boolean;
 }
 
-const HeroControls = ({ 
-  currentSlide, 
+const HeroControls = ({
+  currentSlide,
   totalSlides,
   onPrev,
   onNext,
   onSelect,
-  isTransitioning 
+  isTransitioning
 }: HeroControlsProps) => {
   return (
     <div className="absolute bottom-8 left-0 right-0 flex justify-between items-center px-8 z-20">
@@ -28,9 +28,9 @@ const HeroControls = ({
             onClick={() => !isTransitioning && onSelect(index)}
             className={`transition-all duration-300 ${
               currentSlide === index 
-                ? "w-6 h-2 bg-gold" 
-                : "w-2 h-2 bg-white/50"
-            } rounded-full`}
+                ? "w-6 bg-gold" 
+                : "w-2 bg-white/50"
+            } h-2 rounded-full`}
             aria-label={`Перейти к слайду ${index + 1}`}
             disabled={isTransitioning}
           />
@@ -42,8 +42,8 @@ const HeroControls = ({
           variant="ghost"
           size="icon"
           onClick={onPrev}
-          disabled={isTransitioning}
           className="hover:bg-white/10 text-white border border-white/20 rounded-full h-10 w-10"
+          disabled={isTransitioning}
         >
           <ChevronLeft className="h-5 w-5" />
         </Button>
@@ -51,8 +51,8 @@ const HeroControls = ({
           variant="ghost"
           size="icon"
           onClick={onNext}
-          disabled={isTransitioning}
           className="hover:bg-white/10 text-white border border-white/20 rounded-full h-10 w-10"
+          disabled={isTransitioning}
         >
           <ChevronRight className="h-5 w-5" />
         </Button>
