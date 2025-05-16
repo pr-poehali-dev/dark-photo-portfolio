@@ -1,69 +1,76 @@
 
-import { useState, useEffect } from "react";
-import { SlideData } from "@/types/slideTypes";
+import { useState, useEffect, useCallback } from "react";
 import HeroSlide from "./HeroSlide";
 import HeroControls from "./HeroControls";
+import ScrollIndicator from "./ScrollIndicator";
+import { slides } from "../../data/slides";
 
-interface HeroProps {
-  slides: SlideData[];
-  autoPlayInterval?: number;
-}
-
-const Hero = ({ slides, autoPlayInterval = 6000 }: HeroProps) => {
+const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
-  const handleSlideChange = (newIndex: number) => {
-    if (isTransitioning || newIndex === currentSlide) return;
-    setIsTransitioning(true);
-    setCurrentSlide(newIndex);
-  };
+  const goToNextSlide = useCallback(() => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
+  }, [isAnimating]);
 
-  const nextSlide = () => {
-    handleSlideChange((currentSlide + 1) % slides.length);
-  };
+  const goToPrevSlide = useCallback(() => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
+  }, [isAnimating]);
 
-  const prevSlide = () => {
-    handleSlideChange((currentSlide - 1 + slides.length) % slides.length);
-  };
-
-  const handleAnimationComplete = () => {
-    setIsTransitioning(false);
-  };
+  const goToSlide = useCallback((index: number) => {
+    if (isAnimating || index === currentSlide) return;
+    
+    setIsAnimating(true);
+    setCurrentSlide(index);
+    
+    setTimeout(() => {
+      setIsAnimating(false);
+    }, 1000);
+  }, [currentSlide, isAnimating]);
 
   // Автоматическая смена слайдов
   useEffect(() => {
-    if (isTransitioning) return;
-
     const interval = setInterval(() => {
-      nextSlide();
-    }, autoPlayInterval);
-
+      goToNextSlide();
+    }, 6000);
+    
     return () => clearInterval(interval);
-  }, [currentSlide, isTransitioning, autoPlayInterval]);
+  }, [goToNextSlide]);
 
   return (
-    <div className="h-screen w-full relative overflow-hidden">
-      {/* Слайды */}
+    <section className="relative h-screen overflow-hidden">
       {slides.map((slide, index) => (
         <HeroSlide
           key={slide.id}
           slide={slide}
-          isActive={index === currentSlide}
-          onAnimationComplete={handleAnimationComplete}
+          isActive={currentSlide === index}
         />
       ))}
 
-      {/* Контролы слайдера */}
       <HeroControls
         currentSlide={currentSlide}
         totalSlides={slides.length}
-        onPrev={prevSlide}
-        onNext={nextSlide}
-        onSelect={handleSlideChange}
-        isTransitioning={isTransitioning}
+        onPrev={goToPrevSlide}
+        onNext={goToNextSlide}
+        onDotClick={goToSlide}
       />
-    </div>
+      
+      <ScrollIndicator />
+    </section>
   );
 };
 

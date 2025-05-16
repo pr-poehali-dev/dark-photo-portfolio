@@ -1,51 +1,74 @@
 
-import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileMenu from "./MobileMenu";
 
-interface NavigationProps {
-  isTransparent?: boolean;
-}
+const Navigation = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  
+  const navItems = [
+    { name: "Главная", href: "#hero" },
+    { name: "Галереи", href: "#galleries" },
+    { name: "Обо мне", href: "#about" },
+    { name: "Услуги", href: "#services" },
+    { name: "Блог", href: "#blog" },
+    { name: "Контакты", href: "#contacts" },
+  ];
 
-const Navigation = ({ isTransparent = true }: NavigationProps) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <>
-      <nav className={`absolute top-0 left-0 w-full z-50 flex justify-between items-center px-8 py-6 ${isTransparent ? 'bg-transparent' : 'bg-[#121212]/95'}`}>
-        <div className="text-xl md:text-2xl font-playfair text-[#D4AF37]">
-          <h1 className="tracking-wider">ФОТО<span className="text-white">ГРАФ</span></h1>
-        </div>
-        
-        <div className="hidden md:flex space-x-8">
-          {["Главная", "Галереи", "Обо мне", "Услуги", "Блог", "Контакты"].map((item) => (
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-darker/90 backdrop-blur-md py-3 shadow-lg"
+          : "bg-transparent py-6"
+      }`}
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        <a href="/" className="text-2xl font-playfair text-white">
+          <span className="text-gold">Photo</span>Studio
+        </a>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          {navItems.map((item) => (
             <a
-              key={item}
-              href="#"
-              className="text-white hover:text-[#D4AF37] transition-colors duration-300 font-light text-sm tracking-wider"
+              key={item.name}
+              href={item.href}
+              className="text-white hover:text-gold transition-colors"
             >
-              {item}
+              {item.name}
             </a>
           ))}
-        </div>
-        
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden text-white hover:text-[#D4AF37] hover:bg-transparent"
-          onClick={toggleMenu}
-        >
-          <Menu />
-        </Button>
-      </nav>
+        </nav>
 
-      {isMenuOpen && <MobileMenu isOpen={isMenuOpen} />}
-    </>
+        {/* Call to Action */}
+        <div className="hidden lg:block">
+          <a
+            href="#contacts"
+            className="py-2 px-6 bg-gold text-black font-medium rounded-sm hover:bg-gold/90 transition-colors"
+          >
+            Записаться на съемку
+          </a>
+        </div>
+
+        {/* Mobile Menu */}
+        <MobileMenu />
+      </div>
+    </header>
   );
 };
 

@@ -1,3 +1,4 @@
+
 import { SlideItem } from "../types/slideTypes";
 
 export const slides: SlideItem[] = [
