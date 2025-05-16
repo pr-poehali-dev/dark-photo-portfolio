@@ -17,7 +17,7 @@ const Contacts = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Форма обратной связи */}
           <div className="bg-[#1a1a1a] p-8 rounded-lg">
-            <h3 className="text-2xl font-playfair text-white mb-6">Отправить сообщение</h3>
+            <h3 className="text-2xl font-playfair text-white mb-6">Записаться на съемку</h3>
             
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -27,6 +27,7 @@ const Contacts = () => {
                     type="text" 
                     id="name" 
                     className="w-full bg-[#252525] border border-gold/20 rounded-sm px-4 py-2 text-white focus:border-gold/50 focus:outline-none"
+                    placeholder="Ваше имя"
                   />
                 </div>
                 <div>
@@ -35,25 +36,43 @@ const Contacts = () => {
                     type="email" 
                     id="email" 
                     className="w-full bg-[#252525] border border-gold/20 rounded-sm px-4 py-2 text-white focus:border-gold/50 focus:outline-none"
+                    placeholder="example@mail.com"
                   />
                 </div>
               </div>
               
               <div>
-                <label htmlFor="subject" className="block text-white/80 text-sm mb-2">Тема</label>
+                <label htmlFor="phone" className="block text-white/80 text-sm mb-2">Телефон</label>
                 <input 
-                  type="text" 
-                  id="subject" 
+                  type="tel" 
+                  id="phone" 
                   className="w-full bg-[#252525] border border-gold/20 rounded-sm px-4 py-2 text-white focus:border-gold/50 focus:outline-none"
+                  placeholder="+7 (___) ___-__-__"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block text-white/80 text-sm mb-2">Сообщение</label>
+                <label htmlFor="service" className="block text-white/80 text-sm mb-2">Тип съемки</label>
+                <select 
+                  id="service" 
+                  className="w-full bg-[#252525] border border-gold/20 rounded-sm px-4 py-2 text-white focus:border-gold/50 focus:outline-none"
+                >
+                  <option value="" disabled selected>Выберите тип съемки</option>
+                  <option value="portrait">Портретная съемка</option>
+                  <option value="wedding">Свадебная фотография</option>
+                  <option value="commercial">Коммерческая фотография</option>
+                  <option value="travel">Тревел-фотография</option>
+                  <option value="other">Другое</option>
+                </select>
+              </div>
+              
+              <div>
+                <label htmlFor="message" className="block text-white/80 text-sm mb-2">Комментарий</label>
                 <textarea 
                   id="message" 
-                  rows={5} 
+                  rows={4} 
                   className="w-full bg-[#252525] border border-gold/20 rounded-sm px-4 py-2 text-white focus:border-gold/50 focus:outline-none resize-none"
+                  placeholder="Расскажите подробнее о вашей задумке или задайте вопрос"
                 ></textarea>
               </div>
               
@@ -61,63 +80,116 @@ const Contacts = () => {
                 type="submit"
                 className="bg-gold hover:bg-gold/90 text-black font-medium px-6 py-2 rounded-sm"
               >
-                Отправить
+                Отправить заявку
               </Button>
             </form>
           </div>
           
           {/* Контактная информация */}
           <div className="space-y-8">
-            {/* Google карта (заглушка) */}
-            <div className="w-full h-64 bg-[#1a1a1a] rounded-lg relative overflow-hidden">
-              {/* Здесь должна быть карта Google Maps */}
-              <div className="absolute inset-0 flex items-center justify-center text-white/50">
-                <p>Карта Google Maps будет здесь</p>
+            {/* Контактные данные */}
+            <div className="bg-[#1a1a1a] p-8 rounded-lg">
+              <h3 className="text-2xl font-playfair text-white mb-6">Контактная информация</h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start">
+                  <Icon name="MapPin" className="text-gold mt-1 mr-4" size={20} />
+                  <div>
+                    <h4 className="text-white font-medium mb-1">Адрес</h4>
+                    <p className="text-white/70">г. Москва, ул. Фотографов, 123</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <Icon name="Phone" className="text-gold mt-1 mr-4" size={20} />
+                  <div>
+                    <h4 className="text-white font-medium mb-1">Телефон</h4>
+                    <p className="text-white/70">+7 (999) 123-45-67</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <Icon name="Mail" className="text-gold mt-1 mr-4" size={20} />
+                  <div>
+                    <h4 className="text-white font-medium mb-1">Email</h4>
+                    <p className="text-white/70">info@photographer.ru</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <Icon name="Clock" className="text-gold mt-1 mr-4" size={20} />
+                  <div>
+                    <h4 className="text-white font-medium mb-1">Часы работы</h4>
+                    <p className="text-white/70">Пн-Пт: 10:00 - 19:00</p>
+                    <p className="text-white/70">Сб: 11:00 - 16:00</p>
+                  </div>
+                </div>
               </div>
             </div>
             
-            {/* Контактные данные */}
-            <div className="space-y-6">
-              <div className="flex items-start">
-                <Icon name="MapPin" className="text-gold mt-1 mr-4" size={20} />
-                <div>
-                  <h4 className="text-white font-medium mb-1">Адрес</h4>
-                  <p className="text-white/70">г. Москва, ул. Фотографов, 123</p>
-                </div>
+            {/* Социальные сети */}
+            <div className="bg-[#1a1a1a] p-8 rounded-lg">
+              <h3 className="text-2xl font-playfair text-white mb-6">Мои социальные сети</h3>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <a 
+                  href="#" 
+                  className="flex items-center p-4 bg-[#252525] rounded-md hover:bg-gold/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#1a1a1a] flex items-center justify-center mr-4 text-white group-hover:bg-gold group-hover:text-black transition-colors">
+                    <Icon name="Instagram" size={22} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Instagram</h4>
+                    <p className="text-white/60 text-sm">@photographer</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="#" 
+                  className="flex items-center p-4 bg-[#252525] rounded-md hover:bg-gold/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#1a1a1a] flex items-center justify-center mr-4 text-white group-hover:bg-gold group-hover:text-black transition-colors">
+                    <Icon name="Facebook" size={22} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Facebook</h4>
+                    <p className="text-white/60 text-sm">@photographer.page</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="#" 
+                  className="flex items-center p-4 bg-[#252525] rounded-md hover:bg-gold/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#1a1a1a] flex items-center justify-center mr-4 text-white group-hover:bg-gold group-hover:text-black transition-colors">
+                    <Icon name="Twitter" size={22} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">Twitter</h4>
+                    <p className="text-white/60 text-sm">@photographer</p>
+                  </div>
+                </a>
+                
+                <a 
+                  href="#" 
+                  className="flex items-center p-4 bg-[#252525] rounded-md hover:bg-gold/10 transition-colors group"
+                >
+                  <div className="w-12 h-12 rounded-full bg-[#1a1a1a] flex items-center justify-center mr-4 text-white group-hover:bg-gold group-hover:text-black transition-colors">
+                    <Icon name="Youtube" size={22} />
+                  </div>
+                  <div>
+                    <h4 className="text-white font-medium">YouTube</h4>
+                    <p className="text-white/60 text-sm">Фотограф Channel</p>
+                  </div>
+                </a>
               </div>
               
-              <div className="flex items-start">
-                <Icon name="Phone" className="text-gold mt-1 mr-4" size={20} />
-                <div>
-                  <h4 className="text-white font-medium mb-1">Телефон</h4>
-                  <p className="text-white/70">+7 (999) 123-45-67</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <Icon name="Mail" className="text-gold mt-1 mr-4" size={20} />
-                <div>
-                  <h4 className="text-white font-medium mb-1">Email</h4>
-                  <p className="text-white/70">info@photographer.ru</p>
-                </div>
-              </div>
-              
-              <div className="pt-4">
-                <h4 className="text-white font-medium mb-3">Социальные сети</h4>
-                <div className="flex space-x-4">
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-white hover:bg-gold hover:text-black transition-colors">
-                    <Icon name="Instagram" size={18} />
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-white hover:bg-gold hover:text-black transition-colors">
-                    <Icon name="Facebook" size={18} />
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-white hover:bg-gold hover:text-black transition-colors">
-                    <Icon name="Twitter" size={18} />
-                  </a>
-                  <a href="#" className="w-10 h-10 rounded-full bg-[#1a1a1a] flex items-center justify-center text-white hover:bg-gold hover:text-black transition-colors">
-                    <Icon name="Youtube" size={18} />
-                  </a>
-                </div>
+              <div className="mt-6 p-4 bg-gold/10 rounded-md">
+                <p className="text-gold flex items-center">
+                  <Icon name="Info" size={16} className="mr-2" />
+                  Подписывайтесь на меня в социальных сетях для получения скидок и акций!
+                </p>
               </div>
             </div>
           </div>
