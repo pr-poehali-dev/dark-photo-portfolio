@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { SlideData } from "@/types/slideTypes";
 import HeroSlide from "./HeroSlide";
@@ -46,7 +45,7 @@ const Hero = ({ slides, autoPlayInterval = 6000 }: HeroProps) => {
     <div className="h-screen w-full relative overflow-hidden">
       {/* Слайды */}
       {slides.map((slide, index) => (
-        <HeroSlide 
+        <HeroSlide
           key={slide.id}
           slide={slide}
           isActive={index === currentSlide}
