@@ -1,9 +1,11 @@
 
+// Типы для галерей
+
 export interface GalleryItem {
   id: string;
   image: string;
   title: string;
-  desc?: string;
+  description?: string;
 }
 
 export interface Gallery {
@@ -11,11 +13,5 @@ export interface Gallery {
   title: string;
   description: string;
   items: GalleryItem[];
-}
-
-export interface GalleryCategory {
-  id: string;
-  title: string;
-  description: string;
   coverImage: string;
 }

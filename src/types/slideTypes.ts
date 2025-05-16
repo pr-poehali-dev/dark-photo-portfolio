@@ -1,9 +1,14 @@
 
-export interface SlideData {
+export interface SlideItem {
   id: number;
   image: string;
   title: string;
   description: string;
 }
 
-export interface SlideItem extends SlideData {}
+export interface SlideData {
+  id: number;
+  image: string;
+  title: string;
+  description: string;
+}

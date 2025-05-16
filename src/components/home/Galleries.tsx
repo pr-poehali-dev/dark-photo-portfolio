@@ -1,78 +1,70 @@
 import { useState } from "react";
-import { galleryCategories } from "@/data/galleries";
+import { galleryCategories } from "@/data/galleries/categories";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Galleries = () => {
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
-  const activeGallery = galleries.find(
-    (gallery) => gallery.id === activeCategory,
-  );
-
   return (
-    <section id="galleries" className="py-24 bg-[#0a0a0a]">
+    <section id="galleries" className="py-20 bg-darkbg">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-playfair mb-4 text-white">
-            Галереи
+            Портфолио
           </h2>
           <div className="h-[2px] w-16 bg-gold mx-auto my-4"></div>
           <p className="text-white/80 max-w-2xl mx-auto">
-            Исследуйте мои работы в различных жанрах фотографии
+            Просмотрите мои работы по категориям, чтобы увидеть разнообразие
+            моего стиля и подхода к фотографии
           </p>
         </div>
 
-        {/* Категории */}
-        <div className="flex flex-wrap justify-center mb-12 gap-2">
-          {galleries.map((gallery) => (
-            <button
-              key={gallery.id}
-              onClick={() => setActiveCategory(gallery.id)}
-              className={`px-4 py-2 rounded-sm text-sm transition-colors ${
-                activeCategory === gallery.id
-                  ? "bg-gold text-black font-medium"
-                  : "bg-transparent text-white/70 border border-white/20 hover:border-gold/30"
-              }`}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {galleryCategories.map((category) => (
+            <div
+              key={category.id}
+              className="group relative overflow-hidden rounded-lg transition-all duration-500 hover:shadow-lg hover:shadow-gold/10"
+              onMouseEnter={() => setHoveredCategory(category.id)}
+              onMouseLeave={() => setHoveredCategory(null)}
             >
-              {gallery.title}
-            </button>
+              <AspectRatio ratio={3 / 4}>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10"></div>
+                <img
+                  src={category.coverImage}
+                  alt={category.title}
+                  className={`w-full h-full object-cover transition-all duration-700 ${
+                    hoveredCategory === category.id ? "scale-105" : "scale-100"
+                  }`}
+                />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 z-20">
+                  <h3 className="text-2xl font-playfair text-white mb-2">
+                    {category.title}
+                  </h3>
+                  <div
+                    className={`h-[2px] bg-gold transition-all duration-500 ${
+                      hoveredCategory === category.id ? "w-16" : "w-8"
+                    }`}
+                  ></div>
+                  <p className="text-white/80 mt-2 text-sm">
+                    {category.description}
+                  </p>
+
+                  <div
+                    className={`mt-4 overflow-hidden transition-all duration-500 ${
+                      hoveredCategory === category.id
+                        ? "max-h-12 opacity-100"
+                        : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <button className="text-sm text-gold border border-gold/30 py-2 px-4 rounded-sm hover:bg-gold/10 transition-colors">
+                      Смотреть все
+                    </button>
+                  </div>
+                </div>
+              </AspectRatio>
+            </div>
           ))}
         </div>
-
-        {/* Описание активной галереи */}
-        {activeGallery && (
-          <div className="text-center mb-12">
-            <h3 className="text-2xl font-playfair text-white mb-3">
-              {activeGallery.title}
-            </h3>
-            <p className="text-white/70 max-w-2xl mx-auto">
-              {activeGallery.description}
-            </p>
-          </div>
-        )}
-
-        {/* Фотографии */}
-        {activeGallery && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {activeGallery.items.map((item) => (
-              <div
-                key={item.id}
-                className="group relative overflow-hidden rounded-lg"
-              >
-                <AspectRatio ratio={1 / 1} className="bg-[#1a1a1a]">
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                </AspectRatio>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
-                  <span className="text-white font-medium">{item.title}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
       </div>
     </section>
   );
