@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { galleries } from "@/data/galleries";
+import { galleryCategories } from "@/data/galleries";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 const Galleries = () => {
-  const [activeCategory, setActiveCategory] = useState<string>("portrait");
+  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
   const activeGallery = galleries.find(
     (gallery) => gallery.id === activeCategory,
