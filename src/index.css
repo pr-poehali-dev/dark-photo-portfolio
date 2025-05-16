@@ -1,6 +1,5 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -101,17 +100,22 @@
 
   body {
     @apply bg-[#121212] text-foreground;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     font-weight: 300;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Playfair Display", serif;
   }
 }
 
 .font-playfair {
-  font-family: 'Playfair Display', serif;
+  font-family: "Playfair Display", serif;
 }
 
 /* Анимации для элементов при скролле */
@@ -126,9 +130,83 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes expandWidth {
+  from {
+    width: 0;
+  }
+  to {
+    width: 60px;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+.slide-in {
+  animation: slideIn 0.8s ease forwards;
+}
+
+.expand-width {
+  animation: expandWidth 0.8s ease forwards;
+}
+
 /* Дополнительные стили для полноэкранного слайдера */
 .slider-content {
   animation: fadeInUp 1.2s ease forwards;
+}
+
+/* Дополнительные стили для слайдера */
+.slider-transition {
+  transition:
+    opacity 1s ease,
+    transform 0.8s ease;
+}
+
+.slider-item-enter {
+  opacity: 0;
+  transform: scale(1.05);
+}
+
+.slider-item-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition:
+    opacity 1s ease,
+    transform 0.8s ease;
+}
+
+.slider-item-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slider-item-exit-active {
+  opacity: 0;
+  transform: scale(0.95);
+  transition:
+    opacity 1s ease,
+    transform 0.8s ease;
 }
 
 ::-webkit-scrollbar {
@@ -140,7 +218,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D4AF37;
+  background: #d4af37;
   border-radius: 4px;
 }
 
