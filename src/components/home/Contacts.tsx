@@ -1,6 +1,6 @@
-import ContactForm from "./contacts/ContactForm";
-import ContactInfo from "./contacts/ContactInfo";
+import Icon from "@/components/ui/icon";
 import SocialLinks from "./contacts/SocialLinks";
+import ContactInfo from "./contacts/ContactInfo";
 
 const Contacts = () => {
   return (
@@ -12,20 +12,17 @@ const Contacts = () => {
           </h2>
           <div className="h-[2px] w-16 bg-gold mx-auto my-4"></div>
           <p className="text-white/80 max-w-2xl mx-auto">
-            Если вы хотите заказать фотосессию или у вас есть вопросы, свяжитесь
-            со мной удобным способом
+            Найдите меня в социальных сетях или свяжитесь напрямую для
+            сотрудничества и заказов фотосессий
           </p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Форма обратной связи */}
-          <ContactForm />
+          {/* Контактная информация */}
+          <ContactInfo />
 
-          {/* Блоки с контактной информацией и социальными сетями */}
-          <div className="space-y-8">
-            <ContactInfo />
-            <SocialLinks />
-          </div>
+          {/* Социальные сети */}
+          <SocialLinks />
         </div>
       </div>
     </section>
